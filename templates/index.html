@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Song Search Engine</title>
+    </head>
+    <body>
+        <form action="/" method="GET", autocomplete="off">
+            <label for="q">Search here...</label>
+            <input type="text" name="q" id="q" size="50">
+            <input type="submit" value="Search">
+            
+            {% if response!='' %}
+                {% if response['hits']['hits']!=[] %}
+                <ol>
+                    {% for res in response['hits']['hits'] %}
+                    <li>
+                        Title : {{ res._source.title }}<br>
+                        Artist: {{ res._source.artist }}<br>
+                        Genre: {{ res._source.genre }}<br>
+                        Lyrics by: {{ res._source.lyrics_by }}<br>
+                        Music: {{ res._source.music }}<br>
+                        Visits: {{ res._source.visits }}<br>
+                        Lyrics: {{ res._source.lyrics }}
+                    </li>
+                    {% endfor %}
+                </ol>
+                {% else %}
+                    <br>
+                    <label>No Data Available</label>
+                {% endif %}
+            {% endif %}
+            
+        </form>
+    </body>
+
+</html>
